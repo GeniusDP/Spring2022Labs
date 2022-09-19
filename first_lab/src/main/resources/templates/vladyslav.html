@@ -1,16 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <title>Vladislav Moskalenko IP-01</title>
-  </head>
-  <body>
-  <h1>Vladislav Moskalenko IP-01</h1>
-  <ul>
-      <li>Student of KPI</li>
-      <li>Student of the 3-rd course</li>
-      <li>Lean Spring Framework</li>
-  </ul>
-      <a href="/">My Team</a>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Bogdan Zaranik IP-01</title>
+    <link th:href="@{/styles/cssandjs/styles.css}" rel="stylesheet" />
+    <link th:href="@{/styles/cssandjs/link.css}" rel="stylesheet" />
+    <link th:href="@{/styles/cssandjs/cv-style.css}" rel="stylesheet" />
+</head>
+
+<body>
+<div class="container">
+    <div class="photo">
+        <img th:src="@{styles/cssandjs/vlad.jpg}" alt="my photo"/>
+    </div>
+    <header>
+        <div class="person-name">Vladyslav Moskalenko</div>
+        <div class="contacts">
+            <div>
+                <div>Location: Kiev, Ukraine</div>
+                <div>Tel: +38099319438</div>
+                <div>Email: vmskl2020@gmail.com</div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="chapter">HARD SKILLS</div>
+
+        <div class="content">
+            <div class="skill">Java Core</div>
+            <div class="skill">OOP</div>
+            <div class="skill">Spring Boot</div>
+            <div class="skill">Spring Data</div>
+            <div class="skill">Hibernate</div>
+            <div class="skill">Databases: PostgreSQL, MSSQL, MongoDB</div>
+            <div class="skill">Multithreading</div>
+            <div class="skill">JavaScript, React, Redux</div>
+            <div class="skill">Git, GitHub</div>
+            <div class="skill">Design Patterns</div>
+            <div class="skill">Docker, Docker compose</div>
+            <div class="skill">JMeter, YourKit Java Profiler</div>
+        </div>
+
+        <div class="chapter">EDUCATION</div>
+
+        <div class="content">
+            <div class="skill date-holder">
+                <div>Sep 2020 – 2026</div>
+                <div>
+                    Bachelor, National Technical University of Ukraine «Igor Sikorsky
+                    Kyiv Polytechnic Institute»
+                </div>
+            </div>
+        </div>
+
+        <div class="chapter">LANGUAGES</div>
+
+        <div class="content">
+            <div class="skill">English - B1</div>
+            <div class="skill">Russian - C2</div>
+            <div class="skill">Ukrainian - C2</div>
+        </div>
+        <a href="/">Back to team</a>
+    </main>
+</div>
+</body>
 </html>
