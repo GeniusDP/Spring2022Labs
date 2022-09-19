@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(1)
-public class FirstCommandRunner implements CommandLineRunner {
+public class Second implements CommandLineRunner {
 
     @Override
-    public void run(String... args) throws Exception {
-        System.out.println("First");
+    public void run(String... args) {
+        System.out.println("Second");
     }
 }
