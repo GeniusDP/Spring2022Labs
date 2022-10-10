@@ -9,5 +9,5 @@ public class Bid implements BaseEntity{
     private Integer id;
     private User creator;
     private Lot lot;
-
+    private int value;
 }

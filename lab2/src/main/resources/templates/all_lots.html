@@ -11,9 +11,13 @@
         <style>
             .lot{
                 width: 80%;
-                height: 80px;
+                height: 100px;
                 border: 1px solid black;
                 margin: 5px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
             }
             .container{
                 width: 100%;
@@ -32,19 +36,35 @@
                 align-items: center;
             }
 
+            .lot-description{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+
         </style>
+
         <div class="header">
+            <a href="/logout">Logout</a>
             <form th:action="@{/all-lots}" method="get" style="max-width: 350px; margin: 0 auto;">
                 <input type="input" name="filter" class="form-control" placeholder="Filter"/>
-                <input type="submit" placeholder="Filter!"/>
+                <input type="submit" value="Filter!"/>
             </form>
-            <a href="/logout">Logout</a>
         </div>
-        <divc class="container">
-            <div class="lot" th:each = "lot : ${lots}">
-                <div th:text="${lotStat.index+1}"></div>
-                <div th:text="${lot.getLotName()}"></div>
-            </div>
-        </divc>
+        <div class="container">
+            <form th:action="@{/make-bid}" method="get" class="lot" th:each = "lot : ${lots}">
+                <div class="lot-description">
+                    <div th:text="${lotStat.index+1}"></div>
+                    <div th:text="'name = ' + ${lot.getLotName()}"></div>
+                    <div th:text="'status = ' + ${lot.getStatus()}"></div>
+                    <div th:text="'startPrice = ' + ${lot.getTheBiggestBid()}"></div>
+                </div>
+                <input placeholder="bid price" name="value"/>
+                <input hidden name="lotId" th:value="${lot.getId()}">
+                <input type="submit" value="Bid it!"/>
+            </form>
+        </div>
     </body>
 </html>

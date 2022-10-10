@@ -20,13 +20,13 @@ public class User implements UserDetails, BaseEntity {
     @ToString.Exclude
     private List<Lot> lots;
     @ToString.Exclude
-    private List<Bid> bids;
+    private List<Bid> madeBids;
 
     public User(String name, String password) {
         this.name = name;
         this.password = password;
         lots = new ArrayList<>();
-        bids = new ArrayList<>();
+        madeBids = new ArrayList<>();
     }
 
     public void addLot(Lot lot) {
@@ -34,10 +34,16 @@ public class User implements UserDetails, BaseEntity {
         lot.setOwner(this);
     }
 
+    public void addBid(Bid bid, Lot lot) {
+        madeBids.add(bid);
+        lot.addBid(bid);
+        bid.setCreator(this);
+    }
+
     public void makeBidToLot(Bid bid, Lot lot) {
         bid.setLot(lot);
         lot.addBid(bid);
-        bids.add(bid);
+        madeBids.add(bid);
     }
 
     @Override
