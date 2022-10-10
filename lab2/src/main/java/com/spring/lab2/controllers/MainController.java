@@ -50,4 +50,9 @@ public class MainController {
         return "make_bid";
     }
 
+    @GetMapping("/lots-managing")
+    public String managingLots(){
+        return "lots-management";
+    }
+
 }

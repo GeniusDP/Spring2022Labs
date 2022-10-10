@@ -52,6 +52,7 @@
                 <input type="input" name="filter" class="form-control" placeholder="Filter"/>
                 <input type="submit" value="Filter!"/>
             </form>
+            <a href="/lots-managing">To my lots</a>
         </div>
         <div class="container">
             <form th:action="@{/make-bid}" method="get" class="lot" th:each = "lot : ${lots}">

@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 @Builder
 public class Lot implements BaseEntity {
-    private static int currentId = 0;
     private Integer id;
     private String lotName;
     private int startPrice;
