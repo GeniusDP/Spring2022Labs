@@ -1,6 +1,5 @@
 package com.spring.lab2.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
