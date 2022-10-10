@@ -59,7 +59,7 @@
                     <div th:text="${lotStat.index+1}"></div>
                     <div th:text="'name = ' + ${lot.getLotName()}"></div>
                     <div th:text="'status = ' + ${lot.getStatus()}"></div>
-                    <div th:text="'startPrice = ' + ${lot.getTheBiggestBid()}"></div>
+                    <div th:text="'curr max price = ' + ${lot.getTheBiggestBid()}"></div>
                 </div>
                 <input placeholder="bid price" name="value"/>
                 <input hidden name="lotId" th:value="${lot.getId()}">
