@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lots management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <h1>Lot</h1>
+    <div class="card" style="width: 18rem;" th:if="${editable == false}">
+        <!--        <img src="#" class="card-img-top" alt="Cannot fetch the lot image">-->
+        <div class="card-body">
+            <h5 class="card-title" th:text="'Lot name:' + ${lot.lotName}"></h5>
+            <h5 class="card-title" th:text="'Lot current bid:' + ${lot.biggestBid}"></h5>
+            <h5 class="card-title" th:text="'Lot current bid:' + ${lot.status}"></h5>
+            <a href="@{/bids}" class="btn btn-primary">View bids</a>
+        </div>
+    </div>
+    <form th:action="@{/update-lot/{id}(id=${lot.id})}" method="post" th:if="${editable == true}">
+        <div class="mb-3">
+            <label for="lot-id" class="form-label">Lot ID</label>
+            <input type="text" name="lotId" class="form-control" id="lot-id" th:value="${lot.id}"
+                   aria-describedby="emailHelp" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="lot-name" class="form-label">Lot name</label>
+            <input type="text" name="lotName" class="form-control" id="lot-name" th:value="${lot.lotName}"
+                   aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <select class="form-select form-select-lg mb-3" name="status" aria-label=".form-select-lg example">
+                <option th:selected="${lot.status == T(com.spring.lab2.entities.LotStatus).OPENED}" value="OPENED">
+                    OPENED
+                </option>
+                <option th:selected="${lot.status eq T(com.spring.lab2.entities.LotStatus).CLOSED}" value="CLOSED">
+                    CLOSED
+                </option>
+                <option th:selected="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}" value="SOLD">SOLD
+                </option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="lot-biggest-bid" class="form-label">Biggest bid</label>
+            <input type="text" name="biggestBid" class="form-control" id="lot-biggest-bid" th:value="${lot.biggestBid}"
+                   aria-describedby="emailHelp" disabled>
+        </div>
+        <a href="@{/bids}" class="btn btn-primary">View bids</a>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+</body>
+</html>

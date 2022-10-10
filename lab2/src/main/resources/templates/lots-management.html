@@ -2,12 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lots managing</title>
+    <title>Lots management</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 </head>
-  <body>
-        My lots:)
-  </body>
+<body>
+<div class="container">
+    <h1>My lots</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Current bid</th>
+        </tr>
+        </thead>
+        <tbody th:each="lot : ${lots}">
+        <tr>
+            <th scope="row">
+                <a th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"></a>
+            </th>
+            <td th:text="${lot.lotName}"></td>
+            <td th:text="${lot.status}"></td>
+            <td th:text="${lot.biggestBid}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/create-lot" role="button">Add a lot</a>
+</div>
+</body>
 </html>

@@ -23,10 +23,18 @@ public class Lot implements BaseEntity {
         bids.add(bid);
     }
 
-    public int getTheBiggestBid(){
+    public int getBiggestBid(){
         if(bids.size() == 0){
             return startPrice;
         }
         return bids.stream().max(Comparator.comparingInt(Bid::getValue)).get().getValue();
+    }
+
+    public String getLotName() {
+        return lotName;
+    }
+
+    public LotStatus getStatus() {
+        return status;
     }
 }

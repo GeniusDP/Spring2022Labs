@@ -1,5 +1,6 @@
 package com.spring.lab2.entities;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,8 +14,11 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements UserDetails, BaseEntity {
+    @EqualsAndHashCode.Include
     private Integer id;
+    @EqualsAndHashCode.Include
     private final String name;
     private final String password;
     @ToString.Exclude

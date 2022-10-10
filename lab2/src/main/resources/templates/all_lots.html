@@ -48,6 +48,7 @@
 
         <div class="header">
             <a href="/logout">Logout</a>
+            <a href="/lots-management">My lots</a>
             <form th:action="@{/all-lots}" method="get" style="max-width: 350px; margin: 0 auto;">
                 <input type="input" name="filter" class="form-control" placeholder="Filter"/>
                 <input type="submit" value="Filter!"/>
@@ -60,7 +61,7 @@
                     <div th:text="${lotStat.index+1}"></div>
                     <div th:text="'name = ' + ${lot.getLotName()}"></div>
                     <div th:text="'status = ' + ${lot.getStatus()}"></div>
-                    <div th:text="'curr max price = ' + ${lot.getTheBiggestBid()}"></div>
+                    <div th:text="'curr max price = ' + ${lot.getBiggestBid()}"></div>
                 </div>
                 <input placeholder="bid price" name="value"/>
                 <input hidden name="lotId" th:value="${lot.getId()}">
