@@ -9,30 +9,32 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<div class="container-fluid text-center">
-    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+<div style="min-height: 100vh; width: 100%; " class="container-fluid text-center">
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 
-        <div th:if="${param.error}">
-            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-        </div>
+            <div th:if="${param.error}">
+                <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+            </div>
 
-        <div th:if="${param.logout}">
-            <p class="text-warning">You have been logged out.</p>
-        </div>
+            <div th:if="${param.logout}">
+                <p class="text-warning">You have been logged out.</p>
+            </div>
 
-        <div class="border border-secondary p-3 rounded">
-            <p>Access to Shopme Control Panel</p>
-            <p>
-                <input type="input" name="name" class="form-control" placeholder="Login" required autofocus/>
-            </p>
-            <p>
-                <input type="password" name="password" class="form-control" placeholder="Password" required />
-            </p>
-            <p>
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </p>
-        </div>
-    </form>
+            <div class="border border-secondary p-3 rounded">
+                <p>Access to Shopme Control Panel</p>
+                <p>
+                    <input type="input" name="name" class="form-control" placeholder="Login" required autofocus/>
+                </p>
+                <p>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required />
+                </p>
+                <p>
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </p>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

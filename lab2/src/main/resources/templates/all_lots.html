@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+    <body>
+        <style>
+            .lot{
+                width: 80%;
+                height: 100px;
+                border: 1px solid black;
+                margin: 5px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+            .container{
+                width: 100%;
+                height: 100%;
+                min-height: 80vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .header{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            .lot-description{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+        </style>
+
+        <div class="header">
+            <a href="/logout">Logout</a>
+            <form th:action="@{/all-lots}" method="get" style="max-width: 350px; margin: 0 auto;">
+                <input type="input" name="filter" class="form-control" placeholder="Filter"/>
+                <input type="submit" value="Filter!"/>
+            </form>
+            <a href="/lots-managing">To my lots</a>
+        </div>
+        <div class="container">
+            <form th:action="@{/make-bid}" method="get" class="lot" th:each = "lot : ${lots}">
+                <div class="lot-description">
+                    <div th:text="${lotStat.index+1}"></div>
+                    <div th:text="'name = ' + ${lot.getLotName()}"></div>
+                    <div th:text="'status = ' + ${lot.getStatus()}"></div>
+                    <div th:text="'curr max price = ' + ${lot.getTheBiggestBid()}"></div>
+                </div>
+                <input placeholder="bid price" name="value"/>
+                <input hidden name="lotId" th:value="${lot.getId()}">
+                <input type="submit" value="Bid it!"/>
+            </form>
+        </div>
+    </body>
+</html>
