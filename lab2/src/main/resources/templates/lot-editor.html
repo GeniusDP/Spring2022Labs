@@ -47,7 +47,7 @@
             <input type="text" name="biggestBid" class="form-control" id="lot-biggest-bid" th:value="${lot.biggestBid}"
                    aria-describedby="emailHelp" disabled>
         </div>
-        <a href="@{/bids}" class="btn btn-primary">View bids</a>
+        <a th:href="@{/view-bids?lot_id={id}(id=${lot.id})}" class="btn btn-primary">View bids</a>
         <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>

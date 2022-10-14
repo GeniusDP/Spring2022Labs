@@ -17,7 +17,7 @@ public class LotService {
 
     public List<Lot> getAllLots(LotStatus status, String filter) {
         return lotRepository.findAll().stream()
-                .filter(l -> l.getStatus() != status)
+                .filter(l -> l.getStatus() == status)
                 .filter(l -> l.getLotName().toLowerCase().contains(filter))
                 .toList();
     }

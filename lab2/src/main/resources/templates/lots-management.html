@@ -22,7 +22,10 @@
         <tbody th:each="lot : ${lots}">
         <tr>
             <th scope="row">
-                <a th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"></a>
+                <span th:text="${lot.id}"
+                      th:if="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></span>
+                <a th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"
+                   th:unless="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></a>
             </th>
             <td th:text="${lot.lotName}"></td>
             <td th:text="${lot.status}"></td>
