@@ -33,6 +33,9 @@ public class Lab2Application implements CommandLineRunner {
         userRepository.save(bogdan);
 
         User vlad = new User("vlad", "pass");
+        Lot springInActionBook = Lot.builder().lotName("Spring In Action 6-th Edition").owner(vlad).startPrice(70).build();
+        vlad.addLot(springInActionBook);
+        lotRepository.save(springInActionBook);
         userRepository.save(vlad);
 
     }

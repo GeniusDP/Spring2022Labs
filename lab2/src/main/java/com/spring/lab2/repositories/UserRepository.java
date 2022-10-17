@@ -10,7 +10,6 @@ public class UserRepository extends AbstractRepository<User>{
 
     public Optional<User> findByUsername(String username) {
             return map.values().stream()
-                    .peek(System.out::println)
                     .filter(u -> u.getName().equals(username))
                     .limit(1)
                     .findFirst();

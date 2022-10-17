@@ -23,7 +23,10 @@ public class MainController {
     private final SecurityService securityService;
     @GetMapping({"/", "/all-lots"})
     public String index(Model model, @RequestParam(required = false, defaultValue = "") String filter) {
-        model.addAttribute("lots", lotService.getAllLots(LotStatus.OPENED, filter.toLowerCase()));
+        List<Lot> allLots = lotService.getAllLots(LotStatus.OPENED, filter.toLowerCase()).stream()
+                .filter(lot -> !lot.getOwner().equals(securityService.getCurrentUser()))
+                .collect(Collectors.toList());
+        model.addAttribute("lots", allLots);
         return "all_lots";
     }
 
@@ -74,7 +77,7 @@ public class MainController {
         User bidCreator = securityService.getCurrentUser();
         Lot lot = lotService.findById(lotId);
         if (!(LotStatus.OPENED == lot.getStatus())) {
-            throw new IllegalArgumentException("Can't make a bid for the closed lot");
+            return "illegal_bid";
         }
         int minimalPrice = lot.getBiggestBid();
         if(minimalPrice >= value){
