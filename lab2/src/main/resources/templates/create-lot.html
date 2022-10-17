@@ -16,12 +16,12 @@
     <form th:action="@{/create-lot}" method="post">
         <div class="mb-3">
             <label for="lot-name" class="form-label">Lot name</label>
-            <input type="text" name="lotName" class="form-control" id="lot-name" aria-describedby="emailHelp">
+            <input type="text" name="lotName" class="form-control" id="lot-name" aria-describedby="emailHelp" pattern="[a-zA-Z0-9-]+">
         </div>
         <div class="mb-3">
             <label for="lot-init-bid" class="form-label">Initial bid</label>
             <input type="number" name="startPrice" class="form-control" id="lot-init-bid"
-                   aria-describedby="emailHelp">
+                   aria-describedby="emailHelp" pattern="[a-zA-Z0-9-]+">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

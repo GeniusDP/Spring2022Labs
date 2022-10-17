@@ -31,7 +31,7 @@
             </li>
         </ul>
         <form th:action="@{/all-lots}" method="get" class="form-inline">
-            <input class="form-control mr-sm-2" type="search" name="filter" placeholder="Filter" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" name="filter" placeholder="Filter" aria-label="Search" pattern="[a-zA-Z0-9-\s]+">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter!</button>
         </form>
     </div>
@@ -58,7 +58,7 @@
             <td th:text="${lot.biggestBid}"></td>
             <td>
                 <form th:action="@{/make-bid}" method="post">
-                    <input hidden name="lot-id" th:value="${lot.id}"/>
+                    <input hidden name="lot-id" th:value="${lot.id}" pattern="[a-zA-Z0-9-]+"/>
                     <div class="mb-3">
                         <label for="new-price" class="form-label">Bid price</label>
                         <input type="number" name="new-price" class="form-control" id="new-price"/>

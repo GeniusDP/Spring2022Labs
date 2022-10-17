@@ -3,10 +3,10 @@ package com.spring.lab2.controllers;
 import com.spring.lab2.entities.*;
 import com.spring.lab2.services.BidService;
 import com.spring.lab2.services.LotService;
+import com.spring.lab2.services.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class MainController {
     private final LotService lotService;
     private final BidService bidService;
-
+    private final SecurityService securityService;
     @GetMapping({"/", "/all-lots"})
     public String index(Model model, @RequestParam(required = false, defaultValue = "") String filter) {
         model.addAttribute("lots", lotService.getAllLots(LotStatus.OPENED, filter.toLowerCase()));
@@ -34,8 +34,8 @@ public class MainController {
 
     @PostMapping(value = "/create-lot", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createLot(@RequestParam String lotName, @RequestParam Integer startPrice, Model model) {
-        lotService.save(Lot.builder().lotName(lotName).startPrice(startPrice).owner(getCurrentUser()).build());
-        List<Lot> lots = lotService.getAllLotsByOwner(getCurrentUser());
+        lotService.save(Lot.builder().lotName(lotName).startPrice(startPrice).owner(securityService.getCurrentUser()).build());
+        List<Lot> lots = lotService.getAllLotsByOwner(securityService.getCurrentUser());
         model.addAttribute("lots", lots);
         return "redirect:/lots-management";
     }
@@ -57,7 +57,7 @@ public class MainController {
         lot.setStatus(LotStatus.SOLD);
         bidService.save(bid);
         lotService.save(lot);
-        model.addAttribute("lots", lotService.getAllLotsByOwner(getCurrentUser()));
+        model.addAttribute("lots", lotService.getAllLotsByOwner(securityService.getCurrentUser()));
         return "redirect:/lots-management";
     }
 
@@ -71,7 +71,7 @@ public class MainController {
 
     @PostMapping(value = "/make-bid", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String makeBid(@RequestParam("new-price") Integer value, @RequestParam("lot-id") Integer lotId) {
-        User bidCreator = getCurrentUser();
+        User bidCreator = securityService.getCurrentUser();
         Lot lot = lotService.findById(lotId);
         if (!(LotStatus.OPENED == lot.getStatus())) {
             throw new IllegalArgumentException("Can't make a bid for the closed lot");
@@ -97,7 +97,7 @@ public class MainController {
 
     @GetMapping("/lots-management")
     public String managingLots(Model model) {
-        List<Lot> lots = lotService.getAllLotsByOwner(getCurrentUser());
+        List<Lot> lots = lotService.getAllLotsByOwner(securityService.getCurrentUser());
         model.addAttribute("lots", lots);
         return "lots-management";
     }
@@ -106,7 +106,7 @@ public class MainController {
     public String getLotEditor(@PathVariable Integer id, Model model) {
         Lot lot = lotService.getLotById(id);
         model.addAttribute("lot", lot);
-        model.addAttribute("editable", lot.getOwner().equals(getCurrentUser()));
+        model.addAttribute("editable", lot.getOwner().equals(securityService.getCurrentUser()));
         return "lot-editor";
     }
 
@@ -123,12 +123,10 @@ public class MainController {
         }
         lot = lotService.save(lot);
         model.addAttribute("lot", lot);
-        model.addAttribute("editable", lot.getOwner().equals(getCurrentUser()));
+        model.addAttribute("editable", lot.getOwner().equals(securityService.getCurrentUser()));
         return "redirect:/lot-editor/" + id;
     }
 
-    private User getCurrentUser() {
-        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    }
+
 
 }
