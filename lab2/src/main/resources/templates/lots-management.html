@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Lots management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container">
+    <h1>My lots</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Current bid</th>
+        </tr>
+        </thead>
+        <tbody th:each="lot : ${lots}">
+        <tr>
+            <th scope="row">
+                <span th:text="${lot.id}"
+                      th:if="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></span>
+                <a class="btn btn-success" th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"
+                   th:unless="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></a>
+            </th>
+            <td th:text="${lot.lotName}"></td>
+            <td th:text="${lot.status}"></td>
+            <td th:text="${lot.biggestBid}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="/create-lot" role="button">Add a lot</a>
+    <a class="btn btn-primary" href="/all-lots">To all lots</a>
+</div>
+</body>
+</html>

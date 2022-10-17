@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous"/>
+    <style>
+        .container {
+            width: 100%;
+            height: 100%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/lots-management">To my lots</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+        <form th:action="@{/all-lots}" method="get" class="form-inline">
+            <input class="form-control mr-sm-2" type="search" name="filter" placeholder="Filter" aria-label="Search" pattern="[a-zA-Z0-9-\s]+">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter!</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Current bid</th>
+            <th scope="col">Make a bid</th>
+        </tr>
+        </thead>
+        <tbody th:each="lot : ${lots}">
+        <tr>
+            <th scope="row">
+                <a th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"></a>
+            </th>
+            <td th:text="${lot.lotName}"></td>
+            <td th:text="${lot.status}"></td>
+            <td th:text="${lot.biggestBid}"></td>
+            <td>
+                <form th:action="@{/make-bid}" method="post">
+                    <input hidden name="lot-id" th:value="${lot.id}" pattern="[a-zA-Z0-9-]+"/>
+                    <div class="mb-3">
+                        <label for="new-price" class="form-label">Bid price</label>
+                        <input type="number" name="new-price" class="form-control" id="new-price"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Bid it!</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
