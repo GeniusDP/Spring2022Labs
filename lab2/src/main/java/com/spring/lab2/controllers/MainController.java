@@ -76,12 +76,18 @@ public class MainController {
         if (!(LotStatus.OPENED == lot.getStatus())) {
             throw new IllegalArgumentException("Can't make a bid for the closed lot");
         }
+        int minimalPrice = lot.getBiggestBid();
+        if(minimalPrice >= value){
+            return "illegal_bid";
+        }
+
         Bid bid = Bid.builder()
                 .value(value)
                 .creator(bidCreator)
                 .lot(lot)
                 .bidStatus(BidStatus.NOT_PROCESSED)
                 .build();
+
         lot.addBid(bid);
         bidCreator.addBid(bid, lot);
         bidService.save(bid);

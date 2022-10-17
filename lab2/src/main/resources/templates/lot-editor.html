@@ -9,16 +9,21 @@
 </head>
 <body>
 <div class="container">
+
     <h1>Lot</h1>
+
+
+
     <div class="card" style="width: 18rem;" th:if="${editable == false}">
-        <!--        <img src="#" class="card-img-top" alt="Cannot fetch the lot image">-->
         <div class="card-body">
             <h5 class="card-title" th:text="'Lot name:' + ${lot.lotName}"></h5>
             <h5 class="card-title" th:text="'Lot current bid:' + ${lot.biggestBid}"></h5>
             <h5 class="card-title" th:text="'Lot current bid:' + ${lot.status}"></h5>
-            <a href="@{/bids}" class="btn btn-primary">View bids</a>
         </div>
     </div>
+
+
+
     <form th:action="@{/update-lot/{id}(id=${lot.id})}" method="post" th:if="${editable == true}">
         <div class="mb-3">
             <label for="lot-id" class="form-label">Lot ID</label>
@@ -49,8 +54,8 @@
         </div>
         <a th:href="@{/view-bids?lot_id={id}(id=${lot.id})}" class="btn btn-primary">View bids</a>
         <button type="submit" class="btn btn-primary">Update</button>
-        <a class="btn btn-primary" href="/all-lots">To all lots</a>
     </form>
+    <a class="btn btn-primary" href="/all-lots">To all lots</a>
 </div>
 </body>
 </html>

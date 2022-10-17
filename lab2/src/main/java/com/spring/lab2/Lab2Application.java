@@ -24,12 +24,16 @@ public class Lab2Application implements CommandLineRunner {
     @Override
     public void run(String... args) {
         User bogdan = new User("bogdan", "pass");
-        Lot computer = Lot.builder().lotName("computer").owner(bogdan).build();
-        Lot mobilePhone = Lot.builder().lotName("mobile phone").owner(bogdan).build();
+        Lot computer = Lot.builder().lotName("computer").owner(bogdan).startPrice(1300).build();
+        Lot mobilePhone = Lot.builder().lotName("mobile phone").owner(bogdan).startPrice(450).build();
         lotRepository.save(computer);
         lotRepository.save(mobilePhone);
         bogdan.addLot(computer);
         bogdan.addLot(mobilePhone);
         userRepository.save(bogdan);
+
+        User vlad = new User("vlad", "pass");
+        userRepository.save(vlad);
+
     }
 }
