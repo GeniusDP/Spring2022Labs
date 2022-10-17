@@ -9,10 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -45,7 +42,9 @@ public class MainController {
 
     @GetMapping("/view-bids")
     public String viewBidsOfLot(@RequestParam("lot_id") Integer lotId, Model model) {
-        List<Bid> bids = bidService.getAllBidsOfLot(lotId).stream().filter(bid -> BidStatus.NOT_PROCESSED == bid.getBidStatus()).collect(Collectors.toList());
+        List<Bid> bids = bidService.getAllBidsOfLot(lotId).stream()
+                .filter(bid -> BidStatus.NOT_PROCESSED == bid.getBidStatus())
+                .collect(Collectors.toList());
         model.addAttribute("bids", bids);
         return "bids-view";
     }

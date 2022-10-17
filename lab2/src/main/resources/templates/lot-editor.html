@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Lots management</title>
@@ -49,6 +49,7 @@
         </div>
         <a th:href="@{/view-bids?lot_id={id}(id=${lot.id})}" class="btn btn-primary">View bids</a>
         <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-primary" href="/all-lots">To all lots</a>
     </form>
 </div>
 </body>

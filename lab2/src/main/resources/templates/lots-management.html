@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Lots management</title>
@@ -24,7 +24,7 @@
             <th scope="row">
                 <span th:text="${lot.id}"
                       th:if="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></span>
-                <a th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"
+                <a class="btn btn-success" th:href="@{/lot-editor/{id}(id=${lot.id})}" role="button" th:text="${lot.id}"
                    th:unless="${lot.status eq T(com.spring.lab2.entities.LotStatus).SOLD}"></a>
             </th>
             <td th:text="${lot.lotName}"></td>
@@ -33,7 +33,8 @@
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="/create-lot" role="button">Add a lot</a>
+    <a class="btn btn-success" href="/create-lot" role="button">Add a lot</a>
+    <a class="btn btn-primary" href="/all-lots">To all lots</a>
 </div>
 </body>
 </html>
