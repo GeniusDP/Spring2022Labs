@@ -8,15 +8,15 @@ import lombok.Data;
 @Data
 public class LotDto {
 
-  @NotNull
-  @Size(min = 5, max = 100)
+  @NotNull(message = "must not be null")
+  @Size(min = 5, max = 100, message = "length must be >=5 and <=100")
   private String lotName;
 
   @NotNull
-  @Min(1)
+  @Min(value = 1, message = "must be >= 1")
   private Integer startPrice;
 
-  @NotNull
+  @NotNull(message = "must not be null")
   private String username;
 
 }

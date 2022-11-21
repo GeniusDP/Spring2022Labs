@@ -10,6 +10,7 @@ public class Bid implements BaseEntity {
 
     private Integer id;
 
+    @JsonBackReference
     private User creator;
 
     @JsonBackReference

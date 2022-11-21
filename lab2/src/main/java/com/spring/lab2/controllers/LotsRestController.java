@@ -16,6 +16,7 @@ import static com.spring.lab2.Constants.TodoController.TAG;
 import static com.spring.lab2.Constants.TodoController.TAG_DESCRIPTION;
 
 import com.spring.lab2.dto.request.LotDto;
+import com.spring.lab2.dto.request.PageDto;
 import com.spring.lab2.entities.Lot;
 import com.spring.lab2.services.LotRestService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,6 +49,13 @@ public class LotsRestController {
   @GetMapping
   public List<Lot> getAllLots(){
     return lotRestService.findAll();
+  }
+
+  @Operation(summary = GET_ALL_LOTS_SUMMARY, description = GET_ALL_LOTS_DESCRIPTION)
+  @ApiResponse(responseCode = HTTP_STATUS_OK, description = "All lots")
+  @GetMapping("/paginated")
+  public List<Lot> getAllLotsPaginated(PageDto dto){
+    return lotRestService.findAllPaginated(dto);
   }
 
   @Operation(summary = GET_LOT_BY_ID_SUMMARY, description = GET_LOT_BY_ID_DESCRIPTION)

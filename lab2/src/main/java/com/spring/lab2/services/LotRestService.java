@@ -1,6 +1,7 @@
 package com.spring.lab2.services;
 
 import com.spring.lab2.dto.request.LotDto;
+import com.spring.lab2.dto.request.PageDto;
 import com.spring.lab2.entities.Lot;
 import com.spring.lab2.entities.User;
 import com.spring.lab2.exceptions.LotNotFoundException;
@@ -9,11 +10,14 @@ import com.spring.lab2.repositories.LotRepository;
 import com.spring.lab2.repositories.UserRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 @Service
 @RequiredArgsConstructor
+@Validated
 public class LotRestService {
 
   private final LotRepository lotRepository;
@@ -25,7 +29,7 @@ public class LotRestService {
 
   public Lot findById(Integer lotId) {
     Lot lot = lotRepository.findById(lotId);
-    if(lot == null){
+    if (lot == null) {
       throw new LotNotFoundException();
     }
     return lot;
@@ -47,9 +51,18 @@ public class LotRestService {
 
   public void deleteById(Integer lotId) {
     Lot lot = lotRepository.findById(lotId);
-    if(lot == null){
+    if (lot == null) {
       throw new LotNotFoundException();
     }
     lotRepository.deleteById(lotId);
+  }
+
+  public List<Lot> findAllPaginated(@Valid PageDto dto) {
+    int pageNumber = dto.getPage() - 1;
+    int pageSize = dto.getSize();
+    return findAll().stream()
+      .skip((long) pageNumber * pageSize)
+      .limit(pageSize)
+      .toList();
   }
 }
