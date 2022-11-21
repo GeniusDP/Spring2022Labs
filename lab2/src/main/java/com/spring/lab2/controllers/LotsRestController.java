@@ -10,6 +10,8 @@ import static com.spring.lab2.Constants.TodoController.GET_ALL_LOTS_DESCRIPTION;
 import static com.spring.lab2.Constants.TodoController.GET_ALL_LOTS_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.GET_LOT_BY_ID_DESCRIPTION;
 import static com.spring.lab2.Constants.TodoController.GET_LOT_BY_ID_SUMMARY;
+import static com.spring.lab2.Constants.TodoController.GET_PAGINATED_LOTS_LIST_DESCRIPTION;
+import static com.spring.lab2.Constants.TodoController.GET_PAGINATED_LOTS_LIST_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.SAVE_LOT_ITEM_DESCRIPTION;
 import static com.spring.lab2.Constants.TodoController.SAVE_LOT_ITEM_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.TAG;
@@ -20,6 +22,8 @@ import com.spring.lab2.dto.request.PageDto;
 import com.spring.lab2.entities.Lot;
 import com.spring.lab2.services.LotRestService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -51,8 +55,10 @@ public class LotsRestController {
     return lotRestService.findAll();
   }
 
-  @Operation(summary = GET_ALL_LOTS_SUMMARY, description = GET_ALL_LOTS_DESCRIPTION)
+  @Operation(summary = GET_PAGINATED_LOTS_LIST_SUMMARY, description = GET_PAGINATED_LOTS_LIST_DESCRIPTION)
   @ApiResponse(responseCode = HTTP_STATUS_OK, description = "All lots")
+  @Parameter(name = "page", required = true, description = "page number", in = ParameterIn.QUERY)
+  @Parameter(name = "size", required = true, description = "page size", in = ParameterIn.QUERY)
   @GetMapping("/paginated")
   public List<Lot> getAllLotsPaginated(PageDto dto){
     return lotRestService.findAllPaginated(dto);
@@ -61,6 +67,7 @@ public class LotsRestController {
   @Operation(summary = GET_LOT_BY_ID_SUMMARY, description = GET_LOT_BY_ID_DESCRIPTION)
   @ApiResponse(responseCode = HTTP_STATUS_OK, description = "Lot with such id is found")
   @ApiResponse(responseCode = HTTP_STATUS_NOT_FOUND, description = "Lot with such id not found")
+  @Parameter(name = "lotId", required = true, description = "lot id", in = ParameterIn.PATH)
   @GetMapping("/{lotId}")
   public Lot getLotById(@PathVariable Integer lotId){
     return lotRestService.findById(lotId);
@@ -78,6 +85,7 @@ public class LotsRestController {
   @Operation(summary = DELETE_LOT_BY_ID_SUMMARY, description = DELETE_LOT_BY_ID_DESCRIPTION)
   @ApiResponse(responseCode = HTTP_STATUS_NO_CONTENT, description = "Deleted lot successfully")
   @ApiResponse(responseCode = HTTP_STATUS_NOT_FOUND, description = "Lot with such id not found")
+  @Parameter(name = "lotId", required = true, description = "lot id", in = ParameterIn.PATH)
   @DeleteMapping("/{lotId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void deleteLot(@PathVariable Integer lotId){
