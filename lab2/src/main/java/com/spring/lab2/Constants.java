@@ -13,7 +13,7 @@ public class Constants {
         public static final String SAVE_LOT_ITEM_SUMMARY = "create new lot";
         public static final String SAVE_LOT_ITEM_DESCRIPTION = "Save new lot using passed params";
         public static final String UPDATE_LOT_BY_ID_SUMMARY = "update lot by id";
-        public static final String UPDATE_LOT_BY_ID_DESCRIPTION = "Updating lot means that lot will be replaced with new one";
+        public static final String UPDATE_LOT_BY_ID_DESCRIPTION = "Update lot name, lot status, and lot owner";
         public static final String DELETE_LOT_BY_ID_SUMMARY = "Delete todo by id";
         public static final String DELETE_LOT_BY_ID_DESCRIPTION = "If no such todo than message will be provided.";
 
@@ -23,6 +23,7 @@ public class Constants {
         public static final String HTTP_STATUS_OK = "200";
         public static final String HTTP_STATUS_NO_CONTENT = "204";
         public static final String HTTP_STATUS_CREATED = "201";
+        public static final String HTTP_STATUS_BAD_REQUEST = "400";
         public static final String HTTP_STATUS_NOT_FOUND = "404";
     }
 }

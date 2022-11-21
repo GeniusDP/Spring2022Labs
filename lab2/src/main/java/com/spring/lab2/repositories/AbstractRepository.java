@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractRepository<T extends BaseEntity> implements Repository<T>{
+public abstract class AbstractRepository<T extends BaseEntity> implements Repository<T> {
     protected final Map<Integer, T> map = new HashMap<>();
     protected int currentId = 0;
 
