@@ -1,5 +1,7 @@
 package com.spring.lab2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,11 +13,18 @@ import java.util.List;
 @Builder
 public class Lot implements BaseEntity {
     private Integer id;
+
     private String lotName;
+
     private int startPrice;
+
     @Builder.Default
     private LotStatus status = LotStatus.OPENED;
+
+    @JsonIgnore
     private User owner;
+
+    @JsonManagedReference
     @Builder.Default
     private List<Bid> bids = new ArrayList<>();
 

@@ -18,11 +18,15 @@ import java.util.List;
 public class User implements UserDetails, BaseEntity {
     @EqualsAndHashCode.Include
     private Integer id;
+
     @EqualsAndHashCode.Include
     private final String name;
+
     private final String password;
+
     @ToString.Exclude
     private List<Lot> lots;
+
     @ToString.Exclude
     private List<Bid> madeBids;
 
