@@ -1,6 +1,6 @@
 package com.spring.lab2.controllers;
 
-import com.spring.lab2.controllers.dto.request.UserDto;
+import com.spring.lab2.dto.request.UserDto;
 import com.spring.lab2.entities.User;
 import com.spring.lab2.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

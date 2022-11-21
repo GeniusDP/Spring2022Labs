@@ -1,4 +1,4 @@
-package com.spring.lab2.controllers.dto.request;
+package com.spring.lab2.dto.request;
 
 import lombok.Getter;
 
