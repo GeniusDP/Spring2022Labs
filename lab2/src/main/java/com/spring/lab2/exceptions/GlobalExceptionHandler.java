@@ -14,4 +14,9 @@ public class GlobalExceptionHandler {
     return AppError.justNow("No such lot found");
   }
 
+  @ExceptionHandler(UserNotFoundException.class)
+  public AppError userNotFoundExceptionHandler(){
+    return AppError.justNow("No such user found");
+  }
+
 }

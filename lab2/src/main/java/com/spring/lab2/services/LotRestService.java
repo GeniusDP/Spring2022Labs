@@ -44,4 +44,12 @@ public class LotRestService {
       .build();
     return lotRepository.save(lot);
   }
+
+  public void deleteById(Integer lotId) {
+    Lot lot = lotRepository.findById(lotId);
+    if(lot == null){
+      throw new LotNotFoundException();
+    }
+    lotRepository.deleteById(lotId);
+  }
 }

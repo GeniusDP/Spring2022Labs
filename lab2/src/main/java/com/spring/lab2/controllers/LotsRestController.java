@@ -2,13 +2,16 @@ package com.spring.lab2.controllers;
 
 import static com.spring.lab2.Constants.Informer.HTTP_STATUS_CREATED;
 import static com.spring.lab2.Constants.Informer.HTTP_STATUS_NOT_FOUND;
+import static com.spring.lab2.Constants.Informer.HTTP_STATUS_NO_CONTENT;
 import static com.spring.lab2.Constants.Informer.HTTP_STATUS_OK;
+import static com.spring.lab2.Constants.TodoController.DELETE_LOT_BY_ID_DESCRIPTION;
+import static com.spring.lab2.Constants.TodoController.DELETE_LOT_BY_ID_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.GET_ALL_LOTS_DESCRIPTION;
 import static com.spring.lab2.Constants.TodoController.GET_ALL_LOTS_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.GET_LOT_BY_ID_DESCRIPTION;
 import static com.spring.lab2.Constants.TodoController.GET_LOT_BY_ID_SUMMARY;
-import static com.spring.lab2.Constants.TodoController.SAVE_TODO_ITEM_DESCRIPTION;
-import static com.spring.lab2.Constants.TodoController.SAVE_TODO_ITEM_SUMMARY;
+import static com.spring.lab2.Constants.TodoController.SAVE_LOT_ITEM_DESCRIPTION;
+import static com.spring.lab2.Constants.TodoController.SAVE_LOT_ITEM_SUMMARY;
 import static com.spring.lab2.Constants.TodoController.TAG;
 import static com.spring.lab2.Constants.TodoController.TAG_DESCRIPTION;
 
@@ -23,6 +26,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,13 +58,22 @@ public class LotsRestController {
     return lotRestService.findById(lotId);
   }
 
-  @Operation(summary = SAVE_TODO_ITEM_SUMMARY, description = SAVE_TODO_ITEM_DESCRIPTION)
+  @Operation(summary = SAVE_LOT_ITEM_SUMMARY, description = SAVE_LOT_ITEM_DESCRIPTION)
   @ApiResponse(responseCode = HTTP_STATUS_CREATED, description = "New lot created")
   @ApiResponse(responseCode = HTTP_STATUS_NOT_FOUND, description = "No such user found")
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Lot createLot(@Valid @RequestBody LotDto dto){
     return lotRestService.save(dto);
+  }
+
+  @Operation(summary = DELETE_LOT_BY_ID_SUMMARY, description = DELETE_LOT_BY_ID_DESCRIPTION)
+  @ApiResponse(responseCode = HTTP_STATUS_NO_CONTENT, description = "Deleted lot successfully")
+  @ApiResponse(responseCode = HTTP_STATUS_NOT_FOUND, description = "Lot with such id not found")
+  @DeleteMapping("/{lotId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteLot(@PathVariable Integer lotId){
+    lotRestService.deleteById(lotId);
   }
 
 }
