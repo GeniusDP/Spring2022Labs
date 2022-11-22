@@ -11,7 +11,17 @@ logging:
     org.springframework.security: INFO
 
 spring:
+  application:
+    name: "Lab 4-6 Spring"
+    version: 1.0
+    description: "Spring dev course labs"
   thymeleaf:
     cache: false
   main:
     allow-circular-references: true
+
+
+springdoc:
+  contact:
+    name: "Bogdan Zaranik"
+    email: "zaranikbz@gmail.com"
